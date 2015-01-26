@@ -14,13 +14,11 @@ public:
 
 	void push_back(const T &v){
 		this->AddChunkIfNeeded();
-
 		this->storage.back().push_back(v);
 	}
 
 	void push_back(T &&v){
 		this->AddChunkIfNeeded();
-
 		this->storage.back().push_back(std::move(v));
 	}
 

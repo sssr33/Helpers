@@ -7,6 +7,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="containers\chunked_data_buffer.h" />
+    <ClInclude Include="containers\concurrent_queue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
