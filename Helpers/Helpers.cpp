@@ -10,6 +10,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	size_t sz = 0;
 	uint8_t data[] = { 1, 2, 3, 4, 5, 6, 7 };
+	uint8_t dataCopy[6];
 	chunked_data_buffer<uint8_t, 3> buffer;
 
 	buffer.push_back(1);
@@ -32,6 +33,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	buffer.pop_front();
 	sz = buffer.size();
+
+	auto v = buffer.front();
+	auto copied = buffer.front(dataCopy, dataCopy + sizeof(dataCopy));
 
 	buffer.pop_front(2);
 	sz = buffer.size();

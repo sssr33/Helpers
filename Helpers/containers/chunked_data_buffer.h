@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 #include <list>
+#include <assert.h>
 
 template<class T, size_t ChunkSize = 1024 * 4>
 class chunked_data_buffer{
@@ -51,6 +52,34 @@ public:
 				this->frontChunkBeg = (count + this->frontChunkBeg) % ChunkSize;
 			}
 		}
+	}
+
+	T &front(){
+		assert(!this->empty());
+		return this->storage.front()[this->frontChunkBeg];
+	}
+
+	template<class It>
+	size_t front(It first, It last){
+		size_t copied = 0;
+		auto curIt = first;
+		auto storageIt = this->storage.begin();
+		auto chunkIdx = this->frontChunkBeg;
+
+		while (curIt != last && storageIt != this->storage.end()){
+			while(chunkIdx < storageIt->size() && curIt != last){
+				*curIt = (*storageIt)[chunkIdx];
+
+				chunkIdx++;
+				curIt++;
+				copied++;
+			}
+
+			chunkIdx = 0;
+			storageIt++;
+		}
+
+		return copied;
 	}
 
 	bool empty() const{
