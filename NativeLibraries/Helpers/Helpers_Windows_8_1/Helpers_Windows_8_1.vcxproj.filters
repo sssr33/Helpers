@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{01b2e5e6-521f-42d3-8c3b-35c3c704a3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Folder">
+      <UniqueIdentifier>{68ce47e8-5757-40ed-9db0-5b18dfdd4f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\Folder2">
+      <UniqueIdentifier>{7251d4bb-8f31-4843-acc3-769f5b55f73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\containers">
+      <UniqueIdentifier>{1bcdf567-43e2-4a39-9382-d72a3b658abc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared\service">
+      <UniqueIdentifier>{ffcec98e-519f-489f-ab08-6ad9d6602774}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Helpers_Shared\Folder\FolderClass.cpp">
+      <Filter>Shared\Folder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Helpers_Shared\Folder2\FolderClass.cpp">
+      <Filter>Shared\Folder2</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Helpers_Shared\Folder\FolderClass.h">
+      <Filter>Shared\Folder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers_Shared\Folder2\FolderClass.h">
+      <Filter>Shared\Folder2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers_Shared\containers\chunked_data_buffer.h">
+      <Filter>Shared\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers_Shared\containers\concurrent_queue.h">
+      <Filter>Shared\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers_Shared\service\Operation.h">
+      <Filter>Shared\service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Helpers_Shared\service\Service.h">
+      <Filter>Shared\service</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

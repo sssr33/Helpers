@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Folder\FolderClass.h" />
+    <ClInclude Include="Folder2\FolderClass.h" />
+    <ClInclude Include="service\Operation.h" />
+    <ClInclude Include="service\Service.h" />
     <ClInclude Include="containers\chunked_data_buffer.h" />
     <ClInclude Include="containers\concurrent_queue.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="Folder\FolderClass.cpp" />
+    <ClCompile Include="Folder2\FolderClass.cpp" />
   </ItemGroup>
 </Project>
