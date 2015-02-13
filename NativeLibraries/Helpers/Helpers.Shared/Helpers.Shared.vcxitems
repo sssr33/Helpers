@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{23af15aa-5e5b-4400-b0ae-45cc4719badf}</ItemsProjectGuid>
+    <ItemsRootNamespace>Helpers</ItemsRootNamespace>
+    <ItemsProjectName>Helpers.Shared</ItemsProjectName>
+    <CodeSharingProject>248F659F-DAC5-46E8-AC09-60EC9FC95053</CodeSharingProject>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)containers\chunked_data_buffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)containers\concurrent_queue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)service\Operation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)service\Service.h" />
+  </ItemGroup>
+</Project>

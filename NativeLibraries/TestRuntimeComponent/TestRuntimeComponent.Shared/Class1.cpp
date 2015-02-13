@@ -1,7 +1,5 @@
 ﻿#include "pch.h"
 #include "Class1.h"
-#include "Folder/FolderClass.h"
-#include "Folder2/FolderClass.h"
 #include "containers\chunked_data_buffer.h"
 #include "service\Operation.h"
 #include "service\Service.h"
@@ -19,12 +17,7 @@ Class1::Class1(){
 }
 
 void Class1::Test(){
-	auto res = Folder1::FolderClass::Method(1, 2);
-	auto res2 = Folder2::FolderClass::Method(1, 2);
-
 	service_TEST();
-
-	int stop = 432;
 }
 
 void chunked_data_buffer_TEST(){
