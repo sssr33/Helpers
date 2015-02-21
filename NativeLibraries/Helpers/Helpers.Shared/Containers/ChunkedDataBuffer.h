@@ -38,7 +38,7 @@ public:
 	}
 
 	void PopFront(size_t count = 1){
-		if (!this->empty()){
+		if (!this->Empty()){
 			size_t chunksToRemove = (count + this->frontChunkBeg) / ChunkSize;
 
 			for (size_t i = 0; i < chunksToRemove && !this->storage.empty(); i++){
@@ -55,7 +55,7 @@ public:
 	}
 
 	T &Front(){
-		assert(!this->empty());
+		assert(!this->Empty());
 		return this->storage.front()[this->frontChunkBeg];
 	}
 

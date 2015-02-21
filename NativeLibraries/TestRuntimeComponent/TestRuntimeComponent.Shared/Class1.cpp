@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "Class1.h"
-#include "containers\chunked_data_buffer.h"
+#include "Containers\ChunkedDataBuffer.h"
 #include "service\Operation.h"
 #include "service\Service.h"
 
@@ -24,37 +24,37 @@ void chunked_data_buffer_TEST(){
 	size_t sz = 0;
 	uint8_t data[] = { 1, 2, 3, 4, 5, 6, 7 };
 	uint8_t dataCopy[6];
-	chunked_data_buffer<uint8_t, 3> buffer;
+	ChunkedDataBuffer<uint8_t, 3> buffer;
 
-	buffer.push_back(1);
-	sz = buffer.size();
+	buffer.PushBack(1);
+	sz = buffer.Size();
 
-	buffer.pop_front(1);
-	sz = buffer.size();
+	buffer.PopFront(1);
+	sz = buffer.Size();
 
-	buffer.push_back(1);
-	sz = buffer.size();
+	buffer.PushBack(1);
+	sz = buffer.Size();
 
-	buffer.pop_front(1);
-	sz = buffer.size();
+	buffer.PopFront(1);
+	sz = buffer.Size();
 
-	buffer.push_back(data, data + sizeof(data));
-	sz = buffer.size();
+	buffer.PushBack(data, data + sizeof(data));
+	sz = buffer.Size();
 
-	buffer.pop_front();
-	sz = buffer.size();
+	buffer.PopFront();
+	sz = buffer.Size();
 
-	buffer.pop_front();
-	sz = buffer.size();
+	buffer.PopFront();
+	sz = buffer.Size();
 
-	auto v = buffer.front();
-	auto copied = buffer.front(dataCopy, dataCopy + sizeof(dataCopy));
+	auto v = buffer.Front();
+	auto copied = buffer.Front(dataCopy, dataCopy + sizeof(dataCopy));
 
-	buffer.pop_front(2);
-	sz = buffer.size();
+	buffer.PopFront(2);
+	sz = buffer.Size();
 
-	buffer.pop_front(3);
-	sz = buffer.size();
+	buffer.PopFront(3);
+	sz = buffer.Size();
 }
 
 
