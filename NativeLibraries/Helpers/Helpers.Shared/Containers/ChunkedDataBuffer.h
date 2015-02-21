@@ -6,25 +6,25 @@
 #include <assert.h>
 
 template<class T, size_t ChunkSize = 1024 * 4>
-class chunked_data_buffer{
+class ChunkedDataBuffer{
 public:
 
-	chunked_data_buffer()
+	ChunkedDataBuffer()
 		: frontChunkBeg(0){
 	}
 
-	void push_back(const T &v){
+	void PushBack(const T &v){
 		this->AddChunkIfNeeded();
 		this->storage.back().push_back(v);
 	}
 
-	void push_back(T &&v){
+	void PushBack(T &&v){
 		this->AddChunkIfNeeded();
 		this->storage.back().push_back(std::move(v));
 	}
 
 	template<class It>
-	void push_back(It first, It last){
+	void PushBack(It first, It last){
 		auto curIt = first;
 
 		while (curIt != last){
@@ -37,7 +37,7 @@ public:
 		}
 	}
 
-	void pop_front(size_t count = 1){
+	void PopFront(size_t count = 1){
 		if (!this->empty()){
 			size_t chunksToRemove = (count + this->frontChunkBeg) / ChunkSize;
 
@@ -54,20 +54,20 @@ public:
 		}
 	}
 
-	T &front(){
+	T &Front(){
 		assert(!this->empty());
 		return this->storage.front()[this->frontChunkBeg];
 	}
 
 	template<class It>
-	size_t front(It first, It last){
+	size_t Front(It first, It last){
 		size_t copied = 0;
 		auto curIt = first;
 		auto storageIt = this->storage.begin();
 		auto chunkIdx = this->frontChunkBeg;
 
 		while (curIt != last && storageIt != this->storage.end()){
-			while(chunkIdx < storageIt->size() && curIt != last){
+			while (chunkIdx < storageIt->size() && curIt != last){
 				*curIt = (*storageIt)[chunkIdx];
 
 				chunkIdx++;
@@ -82,11 +82,11 @@ public:
 		return copied;
 	}
 
-	bool empty() const{
+	bool Empty() const{
 		return this->storage.empty() || this->storage.back().size() == this->frontChunkBeg;
 	}
 
-	size_t size() const{
+	size_t Size() const{
 		size_t sz = 0;
 
 		if (this->storage.size() > 0){

@@ -5,27 +5,27 @@
 #include <condition_variable>
 
 template<class T>
-class concurrent_queue{
+class ConcurrentQueue{
 public:
-	concurrent_queue()
+	ConcurrentQueue()
 		: waitStopped(false){
 	}
 
-	void push(const T &v){
+	void Push(const T &v){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 
 		this->q.push(v);
-		this->qCv.notify_all();
+		this->qCv.notify_one();
 	}
 
-	void push(T &&v){
+	void Push(T &&v){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 
 		this->q.push(std::move(v));
-		this->qCv.notify_all();
+		this->qCv.notify_one();
 	}
 
-	bool pop(T &v, bool wait){
+	bool Pop(T &v, bool wait){
 		bool haveValue = false;
 		std::unique_lock<std::mutex> lk(this->qMtx);
 
@@ -33,8 +33,6 @@ public:
 			while (this->q.empty() && !this->waitStopped){
 				this->qCv.wait(lk);
 			}
-
-			this->waitStopped = false;
 		}
 
 		if (!this->q.empty()){
@@ -46,15 +44,29 @@ public:
 		return haveValue;
 	}
 
-	bool empty(){
+	bool Empty(){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 		return this->q.empty();
 	}
 
-	void stop_wait(){
+
+	/*
+	Wake-up all threads and disable waiting.
+	By default waiting is enabled.
+	*/
+	void StopWait(){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 		this->waitStopped = true;
 		this->qCv.notify_all();
+	}
+
+	/*
+	Enable waiting.
+	By default waiting is enabled.
+	*/
+	void ContinueWait(){
+		std::unique_lock<std::mutex> lk(this->qMtx);
+		this->waitStopped = false;
 	}
 private:
 	std::queue<T> q;
