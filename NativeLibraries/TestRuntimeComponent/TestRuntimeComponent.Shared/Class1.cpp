@@ -3,6 +3,7 @@
 #include "Containers\ChunkedDataBuffer.h"
 #include "service\Operation.h"
 #include "service\Service.h"
+#include <Thread\ThreadPool.h>
 
 #include <queue>
 #include <memory>
@@ -12,12 +13,14 @@ using namespace Platform;
 
 void chunked_data_buffer_TEST();
 void service_TEST();
+void ThreadPool_TEST();
 
 Class1::Class1(){
 }
 
 void Class1::Test(){
-	service_TEST();
+	//service_TEST();
+	ThreadPool_TEST();
 }
 
 void chunked_data_buffer_TEST(){
@@ -85,4 +88,17 @@ void service_TEST(){
 	//op->Run(args);
 
 	//auto v = res.get();
+}
+
+
+
+
+void ThreadPool_TEST(){
+	ThreadPool tp;
+
+	tp.Initialize();
+
+	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+	int stop = 32;
 }

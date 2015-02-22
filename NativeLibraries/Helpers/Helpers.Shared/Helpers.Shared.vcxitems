@@ -21,5 +21,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)containers\ConcurrentQueue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)service\Operation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)service\Service.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadPool.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadTask.h" />
   </ItemGroup>
 </Project>
