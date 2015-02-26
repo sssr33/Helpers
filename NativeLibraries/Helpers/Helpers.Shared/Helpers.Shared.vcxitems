@@ -23,5 +23,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)service\Service.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadTask.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadTaskBase.h" />
   </ItemGroup>
 </Project>

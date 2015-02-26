@@ -92,6 +92,18 @@ void service_TEST(){
 
 
 
+std::mutex testVecMtx;
+std::vector<int> testVec;
+
+void testPush(int v){
+	std::lock_guard<std::mutex> lk(testVecMtx);
+
+	if (testVec.empty()){
+		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+	}
+
+	testVec.push_back(v);
+}
 
 void ThreadPool_TEST(){
 	ThreadPool tp;
