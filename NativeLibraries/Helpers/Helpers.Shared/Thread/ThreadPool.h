@@ -6,31 +6,41 @@
 #include <thread>
 #include <mutex>
 #include <list>
+#include <cstdint>
+#include <limits>
 
-class ThreadPool{
+class ThreadPool : public std::enable_shared_from_this<ThreadPool>{
 	class Worker;
+
+	struct this_is_private {
+	};
 public:
+	static std::shared_ptr<ThreadPool> Make(){
+		return std::make_shared<ThreadPool>(this_is_private());
+	}
+
+	static std::shared_ptr<ThreadPool> Make(uint32_t threadCount){
+		return std::make_shared<ThreadPool>(this_is_private(), threadCount);
+	}
+
+	explicit ThreadPool(const this_is_private &)
+		: wantExit(false){
+		uint32_t threadCount = std::thread::hardware_concurrency();
+		this->AddWorkers(threadCount);
+	}
+
+	explicit ThreadPool(const this_is_private &, uint32_t threadCount)
+		: wantExit(false){
+		this->AddWorkers(threadCount);
+	}
+
 	~ThreadPool(){
-		{
-			std::lock_guard<std::mutex> lk(this->workersMtx);
-
-			for (auto &i : this->workers){
-				i->SetExit(true);
-			}
-		}
-
+		this->wantExit = true;
 		this->taskQueue.StopWait();
 	}
 
-	void Initialize(){
-		auto hwThreads = std::thread::hardware_concurrency();
-		std::lock_guard<std::mutex> lk(this->workersMtx);
-
-		for (uint32_t i = 0; i < hwThreads; i++){
-			std::unique_ptr<Worker> worker(new Worker(this));
-			worker->Run();
-			this->workers.push_back(std::move(worker));
-		}
+	std::shared_ptr<ThreadPool> GetPtr() {
+		return shared_from_this();
 	}
 
 	void AddTask(std::unique_ptr<ThreadTask> &&task){
@@ -40,11 +50,22 @@ private:
 	ConcurrentQueue<std::unique_ptr<ThreadTask>> taskQueue;
 	std::mutex workersMtx;
 	std::list<std::unique_ptr<Worker>> workers;
+	bool wantExit;
+
+	void AddWorkers(uint32_t count){
+		std::lock_guard<std::mutex> lk(this->workersMtx);
+
+		for (uint32_t i = 0; i < count; i++){
+			std::unique_ptr<Worker> worker(new Worker(this));
+			worker->Run();
+			this->workers.push_back(std::move(worker));
+		}
+	}
 
 	class Worker{
 	public:
 		Worker(ThreadPool *parent)
-			: parent(parent), exit(false){
+			: parent(parent){
 		}
 
 		~Worker(){
@@ -53,13 +74,9 @@ private:
 			}
 		}
 
-		void SetExit(bool v){
-			this->exit = v;
-		}
-
 		void Run(){
 			this->thread = std::thread([=](){
-				while (!this->exit){
+				while (!this->parent->wantExit){
 					std::unique_ptr<ThreadTask> task;
 
 					if (this->parent->taskQueue.Pop(task, true)){
@@ -69,12 +86,7 @@ private:
 			});
 		}
 	private:
-		bool exit;
 		ThreadPool *parent;
 		std::thread thread;
-
-		static void RunImpl(Worker *_this){
-
-		}
 	};
 };

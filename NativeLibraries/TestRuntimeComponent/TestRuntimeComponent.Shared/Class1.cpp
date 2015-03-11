@@ -106,9 +106,7 @@ void testPush(int v){
 }
 
 void ThreadPool_TEST(){
-	ThreadPool tp;
-
-	tp.Initialize();
+	auto tp = ThreadPool::Make();
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
