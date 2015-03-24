@@ -142,33 +142,44 @@ public:
 };
 
 
+template<class T>
+class Signature{
+public:
+	typedef typename SigHelper<decltype(&T::operator())>::R R;
+	typedef typename SigHelper<decltype(&T::operator())>::A1 A1;
+	typedef typename SigHelper<decltype(&T::operator())>::A2 A2;
+};
+
+
 template<class A1, class A2>
-class MapFactory{
+class MapFactoryHelper{
 public:
 	typedef std::map<int, int> Res;
 };
 
 template<>
-class MapFactory<int, float>{
+class MapFactoryHelper<int, float>{
 public:
 	typedef std::map<int, float> Res;
 };
 
 // <void, float> spec. have no sense
 template<>
-class MapFactory<float, void>{
+class MapFactoryHelper<float, void>{
 public:
 	typedef std::vector<float> Res;
 };
 
+template<class T>
+class MapFactory{
+public:
+	typedef typename MapFactoryHelper<typename Signature<T>::A1, typename Signature<T>::A2>::Res Res;
+};
+
 
 template<class T>
-typename MapFactory<typename SigHelper<decltype(&T::operator())>::A1, typename SigHelper<decltype(&T::operator())>::A2>::Res TTT(T t){
-	/*SigHelper<decltype(&T::operator())>::A1 asd = 2;
-
-	return asd;*/
-
-	return MapFactory<typename SigHelper<decltype(&T::operator())>::A1, typename SigHelper<decltype(&T::operator())>::A2>::Res();
+typename MapFactory<T>::Res TTT(T t){
+	return MapFactory<T>::Res();
 }
 
 
