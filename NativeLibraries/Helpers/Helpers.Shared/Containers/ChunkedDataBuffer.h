@@ -5,6 +5,7 @@
 #include <list>
 #include <assert.h>
 // hello from submodule!!!
+// http://johnleach.co.uk/words/323/git-submodules-in-n-easy-steps
 template<class T, size_t ChunkSize = 1024 * 4>
 class ChunkedDataBuffer{
 public:
