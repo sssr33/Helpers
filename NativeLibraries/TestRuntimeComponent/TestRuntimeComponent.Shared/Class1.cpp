@@ -158,14 +158,14 @@ public:
 };
 
 template<>
-class MapFactoryHelper < int, float > {
+class MapFactoryHelper<int, float>{
 public:
 	typedef std::map<int, float> Res;
 };
 
 // <void, float> spec. have no sense
 template<>
-class MapFactoryHelper < float, void > {
+class MapFactoryHelper<float, void>{
 public:
 	typedef std::vector<float> Res;
 };
@@ -187,6 +187,17 @@ void ThreadPool_TEST(){
 	auto tp = ThreadPool::Make();
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+	int a1 = 213;
+
+	auto b = [&](float a, double d){ 
+		a1++;
+		return a1 + a + 23.23; 
+	};
+
+	std::function<double(float)> fff;
+
+	auto res = TTT(fff);
 
 	int stop = 32;
 }

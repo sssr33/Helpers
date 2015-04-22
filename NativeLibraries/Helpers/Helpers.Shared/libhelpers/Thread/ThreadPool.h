@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <limits>
 
-class ThreadPool : public std::enable_shared_from_this < ThreadPool > {
+class ThreadPool : public std::enable_shared_from_this<ThreadPool>{
 	class Worker;
 
 	struct this_is_private {
@@ -21,13 +21,13 @@ public:
 
 	static std::shared_ptr<ThreadPool> Make(uint32_t threadCount){
 		return std::make_shared<ThreadPool>(this_is_private(), threadCount);
-	}
+			}
 
 	explicit ThreadPool(const this_is_private &)
 		: wantExit(false){
 		uint32_t threadCount = std::thread::hardware_concurrency();
 		this->AddWorkers(threadCount);
-	}
+		}
 
 	explicit ThreadPool(const this_is_private &, uint32_t threadCount)
 		: wantExit(false){
