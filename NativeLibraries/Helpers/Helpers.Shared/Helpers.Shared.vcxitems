@@ -17,12 +17,44 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)containers\ChunkedDataBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)containers\ConcurrentQueue.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)service\Operation.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)service\Service.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadPool.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadTask.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Thread\ThreadTaskBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\AlignedAllocator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\array_wrapper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\async_class.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\bit_view.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\cond_add_reference.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\config.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ChunkedDataBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ConcurrentQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\H.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HSystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HText.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtils.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsEncodeOptions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterFactory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterStd8Bit.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\rational.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\raw_ptr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\result.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ScopedTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\service\Operation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\service\Service.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadPool.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTask.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTaskBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Timer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_pool.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_queue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\WinRT\HDataWinRT.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.cpp" />
   </ItemGroup>
 </Project>

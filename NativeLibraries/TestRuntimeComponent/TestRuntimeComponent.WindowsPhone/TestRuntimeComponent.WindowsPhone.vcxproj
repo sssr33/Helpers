@@ -18,6 +18,11 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Helpers.WindowsPhone\Helpers.WindowsPhone.vcxproj">
+      <Project>{8416a185-0d8c-4f6f-b424-c07632f3ac05}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d5fa721c-dcb0-4354-b999-0162f7dc940c}</ProjectGuid>
     <RootNamespace>TestRuntimeComponent</RootNamespace>

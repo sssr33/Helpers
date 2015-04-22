@@ -26,6 +26,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Helpers\Helpers.Windows\Helpers.Windows.vcxproj">
+      <Project>{26be16fa-646f-4ed1-8136-f553a44c1ed7}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7e3f0dbf-31ac-4f6f-9642-69071786acf3}</ProjectGuid>
     <RootNamespace>TestRuntimeComponent</RootNamespace>

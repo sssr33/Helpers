@@ -1,9 +1,9 @@
 ﻿#include "pch.h"
 #include "Class1.h"
-#include "Containers\ChunkedDataBuffer.h"
-#include "service\Operation.h"
-#include "service\Service.h"
-#include <Thread\ThreadPool.h>
+#include <libhelpers\Containers\ChunkedDataBuffer.h>
+#include <libhelpers\service\Operation.h>
+#include <libhelpers\service\Service.h>
+#include <libhelpers\Thread\ThreadPool.h>
 
 #include <queue>
 #include <memory>
@@ -105,10 +105,86 @@ void testPush(int v){
 	testVec.push_back(v);
 }
 
-void ThreadPool_TEST(){
-	ThreadPool tp;
 
-	tp.Initialize();
+
+#include <type_traits>
+#include <map>
+
+template<class T>
+class SigHelper{
+};
+
+template<class R, class T>
+class SigHelper<R(T::*)() const>{
+public:
+	typedef R R;
+	typedef T T;
+	typedef void A1;
+	typedef void A2;
+};
+
+template<class R, class T, class A1>
+class SigHelper<R(T::*)(A1) const>{
+public:
+	typedef R R;
+	typedef T T;
+	typedef A1 A1;
+	typedef void A2;
+};
+
+template<class R, class T, class A1, class A2>
+class SigHelper<R(T::*)(A1, A2) const>{
+public:
+	typedef R R;
+	typedef T T;
+	typedef A1 A1;
+	typedef A2 A2;
+};
+
+
+template<class T>
+class Signature{
+public:
+	typedef typename SigHelper<decltype(&T::operator())>::R R;
+	typedef typename SigHelper<decltype(&T::operator())>::A1 A1;
+	typedef typename SigHelper<decltype(&T::operator())>::A2 A2;
+};
+
+
+template<class A1, class A2>
+class MapFactoryHelper{
+public:
+	typedef std::map<int, int> Res;
+};
+
+template<>
+class MapFactoryHelper < int, float > {
+public:
+	typedef std::map<int, float> Res;
+};
+
+// <void, float> spec. have no sense
+template<>
+class MapFactoryHelper < float, void > {
+public:
+	typedef std::vector<float> Res;
+};
+
+template<class T>
+class MapFactory{
+public:
+	typedef typename MapFactoryHelper<typename Signature<T>::A1, typename Signature<T>::A2>::Res Res;
+};
+
+
+template<class T>
+typename MapFactory<T>::Res TTT(T t){
+	return MapFactory<T>::Res();
+}
+
+
+void ThreadPool_TEST(){
+	auto tp = ThreadPool::Make();
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
