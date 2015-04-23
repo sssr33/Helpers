@@ -45,6 +45,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\service\Operation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\service\Service.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\PPL\critical_section_lock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTask.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTaskBase.h" />
