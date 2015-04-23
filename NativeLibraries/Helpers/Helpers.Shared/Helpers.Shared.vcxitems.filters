@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_pool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_queue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\Signature.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />

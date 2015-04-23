@@ -33,6 +33,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsEncodeOptions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\Signature.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterFactory.h" />
