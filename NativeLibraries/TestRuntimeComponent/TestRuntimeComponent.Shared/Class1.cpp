@@ -4,6 +4,8 @@
 #include <libhelpers\service\Operation.h>
 #include <libhelpers\service\Service.h>
 #include <libhelpers\Thread\ThreadPool.h>
+#include <libhelpers\Containers\ConcurrentQueue.h>
+#include <libhelpers\H.h>
 
 #include <queue>
 #include <memory>

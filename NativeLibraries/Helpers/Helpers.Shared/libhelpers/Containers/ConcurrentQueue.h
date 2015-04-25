@@ -4,10 +4,10 @@
 #include <mutex>
 #include <condition_variable>
 
-template<class T>
-class ConcurrentQueue{
+template<class T, class EventsImpl>
+class ConcurrentQueueBase{
 public:
-	ConcurrentQueue()
+	ConcurrentQueueBase()
 		: waitStopped(false){
 	}
 
@@ -39,6 +39,8 @@ public:
 			haveValue = true;
 			v = std::move(this->q.front());
 			this->q.pop();
+
+			this->PoppedImpl(v);
 		}
 
 		return haveValue;
@@ -58,6 +60,8 @@ public:
 		std::unique_lock<std::mutex> lk(this->qMtx);
 		this->waitStopped = true;
 		this->qCv.notify_all();
+
+		this->WaitStoppedImpl();
 	}
 
 	/*
@@ -67,10 +71,35 @@ public:
 	void ContinueWait(){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 		this->waitStopped = false;
+
+		this->WaitStartedImpl();
+	}
+protected:
+	std::mutex qMtx;
+
+	void PoppedImpl(T &v){
+		static_cast<EventsImpl *>(this)->PoppedImpl(v);
+	}
+	void WaitStoppedImpl(){
+		static_cast<EventsImpl *>(this)->WaitStoppedImpl();
+	}
+	void WaitStartedImpl(){
+		static_cast<EventsImpl *>(this)->WaitStartedImpl();
 	}
 private:
 	std::queue<T> q;
-	std::mutex qMtx;
 	std::condition_variable qCv;
 	bool waitStopped;
+};
+
+// Default ConcurrentQueue implementation
+template<class T>
+class ConcurrentQueue : public ConcurrentQueueBase < T, ConcurrentQueue<T> > {
+public:
+	// Empty events for default ConcurrentQueue implementation
+	// When you need to implement EventsImpl use this class(ConcurrentQueueEmptyEvents) as start point.
+	// All events will be protected by ConcurrentQueueBase::qMtx
+	void PoppedImpl(T &v){}
+	void WaitStoppedImpl(){}
+	void WaitStartedImpl(){}
 };
