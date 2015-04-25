@@ -14,15 +14,13 @@ public:
 	void Push(const T &v){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 
-		this->q.push(v);
-		this->qCv.notify_one();
+		this->PushInternal(v);
 	}
 
 	void Push(T &&v){
 		std::unique_lock<std::mutex> lk(this->qMtx);
 
-		this->q.push(std::move(v));
-		this->qCv.notify_one();
+		this->PushInternal(std::move(v));
 	}
 
 	bool Pop(T &v, bool wait){
@@ -95,6 +93,20 @@ protected:
 	}
 	void ClearedImpl(){
 		static_cast<EventsImpl *>(this)->ClearedImpl();
+	}
+
+	void PushInternal(const T &v){
+		this->q.push(v);
+		this->qCv.notify_one();
+	}
+
+	void PushInternal(T &&v){
+		this->q.push(std::move(v));
+		this->qCv.notify_one();
+	}
+
+	bool GetWaitStopped() const{
+		return this->waitStopped;
 	}
 private:
 	std::queue<T> q;
