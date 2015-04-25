@@ -74,6 +74,13 @@ public:
 
 		this->WaitStartedImpl();
 	}
+
+	void Clear(){
+		std::unique_lock<std::mutex> lk(this->qMtx);
+
+		this->q = std::queue<T>();
+		this->ClearedImpl();
+	}
 protected:
 	std::mutex qMtx;
 
@@ -85,6 +92,9 @@ protected:
 	}
 	void WaitStartedImpl(){
 		static_cast<EventsImpl *>(this)->WaitStartedImpl();
+	}
+	void ClearedImpl(){
+		static_cast<EventsImpl *>(this)->ClearedImpl();
 	}
 private:
 	std::queue<T> q;
@@ -102,4 +112,5 @@ public:
 	void PoppedImpl(T &v){}
 	void WaitStoppedImpl(){}
 	void WaitStartedImpl(){}
+	void ClearedImpl(){}
 };
