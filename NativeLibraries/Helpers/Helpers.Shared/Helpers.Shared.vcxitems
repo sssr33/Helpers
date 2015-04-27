@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\config.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ChunkedDataBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ConcurrentQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\CoUniquePtr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\H.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HMath.h" />

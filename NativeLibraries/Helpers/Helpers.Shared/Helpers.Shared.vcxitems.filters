@@ -37,6 +37,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_queue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\Signature.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\PPL\critical_section_lock.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\CoUniquePtr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
