@@ -1,4 +1,5 @@
 #pragma once
+#include "config.h"
 
 #include <wrl.h>
 #include <wrl/implements.h>
@@ -15,6 +16,13 @@ class VectorIBuffer :
 public:
 	virtual ~VectorIBuffer(){
 	}
+
+#if HAVE_WINRT == 1
+	Windows::Storage::Streams::IBuffer ^AsIBuffer(){
+		Windows::Storage::Streams::IBuffer ^buf = reinterpret_cast<Windows::Storage::Streams::IBuffer ^>(this);
+		return buf;
+	}
+#endif
 
 	STDMETHODIMP RuntimeClassInitialize(){
 		this->usedSize = 0;
