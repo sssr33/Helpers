@@ -13,27 +13,61 @@ class VectorIBuffer :
 	Windows::Storage::Streams::IBufferByteAccess >
 {
 public:
-	virtual ~VectorIBuffer();
+	virtual ~VectorIBuffer(){
+	}
 
-	STDMETHOD(RuntimeClassInitialize());
+	STDMETHODIMP RuntimeClassInitialize(){
+		this->usedSize = 0;
+		return S_OK;
+	}
 
-	STDMETHOD(Buffer(byte **value));
+	STDMETHODIMP Buffer(byte **value){
+		*value = this->buffer.data();
+		return S_OK;
+	}
 
-	STDMETHOD(get_Capacity(UINT32 *value));
+	STDMETHODIMP get_Capacity(UINT32 *value){
+		*value = static_cast<UINT32>(this->buffer.size());
+		return S_OK;
+	}
 
-	STDMETHOD(get_Length(UINT32 *value));
-	STDMETHOD(put_Length(UINT32 value));
+	STDMETHODIMP get_Length(UINT32 *value){
+		*value = this->usedSize;
+		return S_OK;
+	}
 
-	uint32_t GetUsedSize() const;
+	STDMETHODIMP put_Length(UINT32 value){
+		this->usedSize = value;
+		return S_OK;
+	}
 
-	size_t GetSize() const;
-	void SetSize(size_t v);
+	uint32_t GetUsedSize() const{
+		return this->usedSize;
+	}
 
-	const std::vector<uint8_t> &GetBuffer() const;
-	std::vector<uint8_t> MoveBuffer() const;
+	size_t GetSize() const{
+		return this->buffer.size();
+	}
 
-	void SetBuffer(const std::vector<uint8_t> &v);
-	void SetBuffer(std::vector<uint8_t> &&v);
+	void SetSize(size_t v){
+		this->buffer.resize(v);
+	}
+
+	const std::vector<uint8_t> &GetBuffer() const{
+		return this->buffer;
+	}
+
+	std::vector<uint8_t> MoveBuffer() const{
+		return std::move(this->buffer);
+	}
+
+	void SetBuffer(const std::vector<uint8_t> &v){
+		this->buffer = v;
+	}
+
+	void SetBuffer(std::vector<uint8_t> &&v){
+		this->buffer = std::move(v);
+	}
 private:
 	std::vector<uint8_t> buffer;
 	uint32_t usedSize;

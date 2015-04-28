@@ -61,6 +61,5 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\VectorIBuffer.cpp" />
   </ItemGroup>
 </Project>
