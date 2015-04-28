@@ -9,3 +9,6 @@
 #endif
 #define INCLUDE_PCH_H 0
 #endif
+
+// submodules help:
+// http://johnleach.co.uk/words/323/git-submodules-in-n-easy-steps
