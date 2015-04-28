@@ -13,35 +13,36 @@
 
 class CoroStackInfo3{
 public:
-	uint32_t offset;
-	std::vector<uint8_t> *memory;
 	bool jmpValid;
 	jmp_buf jmp;
 
 	CoroStackInfo3()
-		: offset(-1), jmpValid(false){
+		: jmpValid(false){
 	}
 	virtual ~CoroStackInfo3(){
 	}
 
 	template<class T>
 	T *GetStackTypedPtr(){
-		T *typedPtr = nullptr;
-
-		if (this->memory && this->offset != static_cast<uint32_t>(-1)){
-			typedPtr = reinterpret_cast<T *>(&(*this->memory)[this->offset]);
-		}
-
+		T *typedPtr = reinterpret_cast<T *>(this->memory);
 		return typedPtr;
 	}
+protected:
+	void *memory;
 };
 
 template<class T>
 class GenericCoroStackInfo3 : public CoroStackInfo3{
+public:
+	GenericCoroStackInfo3(){
+		this->memory = new T();
+	}
+
 	virtual ~GenericCoroStackInfo3(){
 		auto typedPtr = this->GetStackTypedPtr<T>();
 		if (typedPtr){
-			typedPtr->~T();
+			delete typedPtr;
+			this->memory = nullptr;
 		}
 	}
 };
@@ -54,7 +55,6 @@ public:
 
 	~coroutine3(){
 		this->varStackInfo.clear();
-		this->varStack.clear();
 	}
 
 	bool GetLoaded() const{
@@ -76,14 +76,7 @@ public:
 
 		if (this->stackLevel >= this->varStackInfo.size()){
 			std::unique_ptr<CoroStackInfo3> stInfo = std::unique_ptr<CoroStackInfo3>(new GenericCoroStackInfo3<T>);
-			stInfo->offset = this->varStack.size();
-			stInfo->memory = &this->varStack;
-
 			this->varStackInfo.push_back(std::move(stInfo));
-			this->varStack.insert(this->varStack.end(), sizeof(T), 0);
-
-			st = this->varStackInfo[this->stackLevel]->GetStackTypedPtr<T>();
-			new (st)T();
 		}
 
 		st = this->varStackInfo[this->stackLevel]->GetStackTypedPtr<T>();
@@ -92,11 +85,7 @@ public:
 
 	void FreeStack(){
 		if (this->stackLevel < this->varStackInfo.size()){
-			auto offset = this->varStackInfo[this->stackLevel]->offset;
-			auto popCount = this->varStack.size() - offset;
-
 			this->varStackInfo.pop_back();
-			this->varStack._Pop_back_n(popCount);
 		}
 
 		this->stackLevel--;
@@ -114,7 +103,6 @@ public:
 		this->stackLevel--;
 	}
 private:
-	std::vector<uint8_t> varStack;
 	std::vector<std::unique_ptr<CoroStackInfo3>> varStackInfo;
 	uint32_t stackLevel;
 	bool loaded;
