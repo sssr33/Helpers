@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\config.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ChunkedDataBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ConcurrentQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\coroutine3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\CoUniquePtr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\H.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HData.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTask.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTaskBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Timer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\VectorIBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_pool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\vector_queue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\WinRT\HDataWinRT.h" />
@@ -59,5 +61,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\VectorIBuffer.cpp" />
   </ItemGroup>
 </Project>

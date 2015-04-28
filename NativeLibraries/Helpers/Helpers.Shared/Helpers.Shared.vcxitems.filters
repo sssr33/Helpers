@@ -38,10 +38,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\Signature.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\PPL\critical_section_lock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\CoUniquePtr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\coroutine3.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\VectorIBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\VectorIBuffer.cpp" />
   </ItemGroup>
 </Project>
