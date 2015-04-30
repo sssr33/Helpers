@@ -59,6 +59,8 @@ private:
 template<class T>
 class critical_section_guard{
 public:
+	typedef critical_section_guard_accessor<typename RawType<T>::Type> Accessor;
+
 	critical_section_guard(){
 	}
 
