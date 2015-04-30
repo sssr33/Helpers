@@ -35,6 +35,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsEncodeOptions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\PointerGetter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\RawType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\Signature.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.h" />
@@ -47,6 +49,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\service\Operation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\service\Service.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\PPL\critical_section_guard.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\PPL\critical_section_lock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadPool.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\ThreadTask.h" />

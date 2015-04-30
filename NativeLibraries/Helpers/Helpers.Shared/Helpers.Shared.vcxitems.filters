@@ -40,6 +40,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\CoUniquePtr.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\coroutine3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\VectorIBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Thread\PPL\critical_section_guard.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\PointerGetter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\RawType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />

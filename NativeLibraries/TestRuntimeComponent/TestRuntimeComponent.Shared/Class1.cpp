@@ -5,6 +5,7 @@
 #include <libhelpers\service\Service.h>
 #include <libhelpers\Thread\ThreadPool.h>
 #include <libhelpers\Containers\ConcurrentQueue.h>
+#include <libhelpers\Thread\PPL\critical_section_guard.h>
 #include <libhelpers\H.h>
 
 #include <queue>
@@ -20,9 +21,50 @@ void ThreadPool_TEST();
 Class1::Class1(){
 }
 
+struct ttt{
+	int v;
+};
+
 void Class1::Test(){
+
+	ttt tmp[4];
+
+	tmp[0].v = 12;
+	tmp[1].v = 34;
+	tmp[2].v = 56;
+	tmp[3].v = 78;
+
+	critical_section_guard<ttt> guard_value(tmp[0]);
+	critical_section_guard<ttt *> guard_pointer(&tmp[1]);
+	critical_section_guard<std::unique_ptr<ttt>> guard_u_pointer(std::unique_ptr<ttt>(new ttt(tmp[2])));
+	critical_section_guard<std::shared_ptr<ttt>> guard_s_pointer(std::shared_ptr<ttt>(new ttt(tmp[3])));
+
+	{
+		auto v_tmp = guard_value.Get();
+		
+		v_tmp->v = 1212;
+	}
+
+	{
+		auto p_tmp = guard_pointer.Get();
+
+		p_tmp->v = 3434;
+	}
+
+	{
+		auto up_tmp = guard_u_pointer.Get();
+
+		up_tmp->v = 5656;
+	}
+
+	{
+		auto sp_tmp = guard_s_pointer.Get();
+
+		sp_tmp->v = 7878;
+	}
+
 	//service_TEST();
-	ThreadPool_TEST();
+	//ThreadPool_TEST();
 }
 
 void chunked_data_buffer_TEST(){
