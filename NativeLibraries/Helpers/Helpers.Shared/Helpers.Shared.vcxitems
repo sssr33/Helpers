@@ -17,6 +17,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ArrayIBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\AlignedAllocator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\array_wrapper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\async_class.h" />
