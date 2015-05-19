@@ -44,6 +44,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\PointerGetter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\RawType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\EnumClassBitFlagOperators.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ArrayIBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
