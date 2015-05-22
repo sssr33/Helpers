@@ -33,18 +33,14 @@ struct PixelFormatConversionDescHash{
 	}
 };
 
-class PixelConverterFactory{
-	static std::unordered_map <
+class PixelConverterFactoryStaticData{
+public:
+	std::unordered_map <
 		PixelFormatConversionDesc,
 		std::function<PixelConverter *()>,
 		PixelFormatConversionDescHash > creators;
-	static int StaticCtorRes;
-	static int StaticCtor(){
-		PixelConverterFactory::InitCreators();
 
-		return 0;
-	}
-	static void InitCreators(){
+	PixelConverterFactoryStaticData(){
 		typedef PixelComponentGetter<true, 0> GetR;
 		typedef PixelComponentGetter<true, 1> GetG;
 		typedef PixelComponentGetter<true, 2> GetB;
@@ -62,95 +58,102 @@ class PixelConverterFactory{
 		// 32 -->> 24
 		convDesc.SourceFormat = GUID_WICPixelFormat32bppBGRA;
 		convDesc.DestinationFormat = GUID_WICPixelFormat24bppRGB;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetB, GetG, GetR, GetA> Getter;
 			typedef PixelSetter<SetR, SetG, SetB, SetADisabled> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat32bppRGBA;
 		convDesc.DestinationFormat = GUID_WICPixelFormat24bppRGB;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetR, GetG, GetB, GetA> Getter;
 			typedef PixelSetter<SetR, SetG, SetB, SetADisabled> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat32bppBGRA;
 		convDesc.DestinationFormat = GUID_WICPixelFormat24bppBGR;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetB, GetG, GetR, GetA> Getter;
 			typedef PixelSetter<SetB, SetG, SetR, SetADisabled> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat32bppRGBA;
 		convDesc.DestinationFormat = GUID_WICPixelFormat24bppBGR;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetR, GetG, GetB, GetA> Getter;
 			typedef PixelSetter<SetB, SetG, SetR, SetADisabled> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		// 24 -->> 32
 		convDesc.SourceFormat = GUID_WICPixelFormat24bppRGB;
 		convDesc.DestinationFormat = GUID_WICPixelFormat32bppBGRA;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetR, GetG, GetB, GetADisabled> Getter;
 			typedef PixelSetter<SetB, SetG, SetR, SetA> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat24bppRGB;
 		convDesc.DestinationFormat = GUID_WICPixelFormat32bppRGBA;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetR, GetG, GetB, GetADisabled> Getter;
 			typedef PixelSetter<SetR, SetG, SetB, SetA> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat24bppBGR;
 		convDesc.DestinationFormat = GUID_WICPixelFormat32bppBGRA;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetB, GetG, GetR, GetADisabled> Getter;
 			typedef PixelSetter<SetB, SetG, SetR, SetA> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat24bppBGR;
 		convDesc.DestinationFormat = GUID_WICPixelFormat32bppRGBA;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetB, GetG, GetR, GetADisabled> Getter;
 			typedef PixelSetter<SetR, SetG, SetB, SetA> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		// 32 -->> 32
 		convDesc.SourceFormat = GUID_WICPixelFormat32bppRGBA;
 		convDesc.DestinationFormat = GUID_WICPixelFormat32bppBGRA;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetR, GetG, GetB, GetA> Getter;
 			typedef PixelSetter<SetB, SetG, SetR, SetA> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
 
 		convDesc.SourceFormat = GUID_WICPixelFormat32bppBGRA;
 		convDesc.DestinationFormat = GUID_WICPixelFormat32bppRGBA;
-		PixelConverterFactory::creators.insert(std::make_pair(convDesc, [](){
+		this->creators.insert(std::make_pair(convDesc, [](){
 			typedef PixelGetter<GetB, GetG, GetR, GetA> Getter;
 			typedef PixelSetter<SetR, SetG, SetB, SetA> Setter;
 
-			return new PixelConverterStd8Bit < Setter, Getter > ;
+			return new PixelConverterStd8Bit < Setter, Getter >;
 		}));
+	}
+};
+
+class PixelConverterFactory{
+	static PixelConverterFactoryStaticData *StaticData(){
+		static PixelConverterFactoryStaticData data;
+		return &data;
 	}
 public:
 	static PixelConverter *CreateConverter(const GUID &src, const GUID &dst){
@@ -166,8 +169,8 @@ public:
 			convDesc.SourceFormat = src;
 			convDesc.DestinationFormat = dst;
 
-			auto finded = PixelConverterFactory::creators.find(convDesc);
-			if (finded != PixelConverterFactory::creators.end()){
+			auto finded = PixelConverterFactory::StaticData()->creators.find(convDesc);
+			if (finded != PixelConverterFactory::StaticData()->creators.end()){
 				res = finded->second();
 			}
 		}
@@ -175,9 +178,3 @@ public:
 		return res;
 	}
 };
-
-std::unordered_map <
-	PixelFormatConversionDesc,
-	std::function<PixelConverter *()>,
-	PixelFormatConversionDescHash > PixelConverterFactory::creators;
-int PixelConverterFactory::StaticCtorRes = PixelConverterFactory::StaticCtor();
