@@ -14,7 +14,7 @@ public:
 	GUID SourceFormat;
 	GUID DestinationFormat;
 
-	bool operator==(const PixelFormatConversionDesc &other){
+	bool operator==(const PixelFormatConversionDesc &other) const{
 		bool res =
 			IsEqualGUID(this->SourceFormat, other.SourceFormat) &&
 			IsEqualGUID(this->DestinationFormat, other.DestinationFormat);
