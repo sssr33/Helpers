@@ -1,7 +1,6 @@
 #pragma once
 #include "config.h"
 #include "H.h"
-#include "ImageUtilsStaticData.h"
 #include "ImageUtilsEncodeOptions.h"
 
 #include <wincodec.h>
@@ -14,6 +13,9 @@
 #if HAVE_WINRT == 0
 #include <Shlwapi.h>
 #endif
+
+typedef GUID GUID_ContainerFormat;
+typedef GUID GUID_WICPixelFormat;
 
 // rotations are clock-wise
 // exif flags starts from 1
@@ -28,7 +30,39 @@ enum class ExifRotationFlag : uint16_t{
 	Rotate90 = 8,
 };
 
-class ImageUtils : public ImageUtilsStaticData{
+class ImageUtilsStaticData{
+public:
+	std::unordered_map<GUID_WICPixelFormat, uint32_t, GUIDHash> WICPixelFormatBitSize;
+
+	ImageUtilsStaticData(){
+		// TODO: add bit sizes for all formats
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppPBGRA, 32));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppPRGBA, 32));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppBGRA, 32));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppRGBA, 32));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat24bppBGR, 24));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat24bppRGB, 24));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat1bppIndexed, 1));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat2bppIndexed, 2));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat4bppIndexed, 4));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat8bppIndexed, 8));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormatBlackWhite, 1));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat2bppGray, 2));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat4bppGray, 4));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat8bppGray, 8));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat8bppAlpha, 8));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppBGR555, 16));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppBGR565, 16));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppBGRA5551, 16));
+		this->WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppGray, 16));
+	}
+};
+
+class ImageUtils{
+	static ImageUtilsStaticData *StaticData(){
+		static ImageUtilsStaticData data;
+		return &data;
+	}
 public:
 	ImageUtils(){
 		H::System::ThrowIfFailed(
@@ -60,8 +94,8 @@ public:
 		hr = frame->GetPixelFormat(&pixelFormat);
 		H::System::ThrowIfFailed(hr);
 
-		auto finded = ImageUtils::WICPixelFormatBitSize.find(pixelFormat);
-		if (finded != ImageUtils::WICPixelFormatBitSize.end()){
+		auto finded = ImageUtils::StaticData()->WICPixelFormatBitSize.find(pixelFormat);
+		if (finded != ImageUtils::StaticData()->WICPixelFormatBitSize.end()){
 			pixelBitSize = finded->second;
 		}
 
@@ -70,8 +104,8 @@ public:
 	uint32_t GetPixelBitSize(const GUID_WICPixelFormat &fmt) const{
 		uint32_t pixelBitSize = 0;
 
-		auto finded = ImageUtils::WICPixelFormatBitSize.find(fmt);
-		if (finded != ImageUtils::WICPixelFormatBitSize.end()){
+		auto finded = ImageUtils::StaticData()->WICPixelFormatBitSize.find(fmt);
+		if (finded != ImageUtils::StaticData()->WICPixelFormatBitSize.end()){
 			pixelBitSize = finded->second;
 		}
 

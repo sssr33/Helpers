@@ -31,15 +31,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\EnumClassBitFlagOperators.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\H.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HData.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HDataCommon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HSystem.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HSystemCommon.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HText.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsEncodeOptions.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsStaticData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\PointerGetter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\RawType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\Signature.h" />
@@ -66,7 +63,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\WinRT\HDataWinRT.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsStaticData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.cpp" />
