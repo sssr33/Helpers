@@ -45,10 +45,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\RawType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\EnumClassBitFlagOperators.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ArrayIBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HDataCommon.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsStaticData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HSystemCommon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverterCopy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\Text\UriCodec.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\ImageUtilsStaticData.cpp" />
   </ItemGroup>
 </Project>

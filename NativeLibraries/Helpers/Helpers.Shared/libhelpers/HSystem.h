@@ -1,5 +1,6 @@
 #pragma once
 #include "config.h"
+#include "HSystemCommon.h"
 #include "HData.h"
 
 #include <cstdint>
@@ -244,20 +245,3 @@ public:
 	}
 #endif
 };
-
-#ifdef HAVE_VISUAL_STUDIO
-
-struct GUIDHash{
-	std::size_t operator()(const GUID &v) const{
-		const uint64_t *tmpData4 = reinterpret_cast<const uint64_t *>(v.Data4);
-
-		std::size_t h1 = std::hash<unsigned long>()(v.Data1);
-		std::size_t h2 = std::hash<unsigned short>()(v.Data2);
-		std::size_t h3 = std::hash<unsigned short>()(v.Data3);
-		std::size_t h4 = std::hash<uint64_t>()(*tmpData4);
-
-		return HData::CombineHash(h1, HData::CombineHash(h2, HData::CombineHash(h3, h4)));
-	}
-};
-
-#endif

@@ -1,5 +1,7 @@
 #pragma once
+#include "config.h"
 #include "H.h"
+#include "ImageUtilsStaticData.h"
 #include "ImageUtilsEncodeOptions.h"
 
 #include <wincodec.h>
@@ -12,9 +14,6 @@
 #if HAVE_WINRT == 0
 #include <Shlwapi.h>
 #endif
-
-typedef GUID GUID_ContainerFormat;
-typedef GUID GUID_WICPixelFormat;
 
 // rotations are clock-wise
 // exif flags starts from 1
@@ -29,36 +28,7 @@ enum class ExifRotationFlag : uint16_t{
 	Rotate90 = 8,
 };
 
-class ImageUtils{
-private:
-	static std::unordered_map<GUID_WICPixelFormat, uint32_t, GUIDHash> WICPixelFormatBitSize;
-
-	static int StaticCtorTmp;
-	static int StaticCtor(){
-
-		// TODO: add bit sizes for all formats
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppPBGRA, 32));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppPRGBA, 32));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppBGRA, 32));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat32bppRGBA, 32));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat24bppBGR, 24));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat24bppRGB, 24));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat1bppIndexed, 1));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat2bppIndexed, 2));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat4bppIndexed, 4));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat8bppIndexed, 8));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormatBlackWhite, 1));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat2bppGray, 2));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat4bppGray, 4));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat8bppGray, 8));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat8bppAlpha, 8));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppBGR555, 16));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppBGR565, 16));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppBGRA5551, 16));
-		WICPixelFormatBitSize.insert(std::make_pair(GUID_WICPixelFormat16bppGray, 16));
-
-		return 0;
-	}
+class ImageUtils : public ImageUtilsStaticData{
 public:
 	ImageUtils(){
 		H::System::ThrowIfFailed(
@@ -527,6 +497,3 @@ private:
 		return Opts[static_cast<uint16_t>(v)-1];
 	}
 };
-
-std::unordered_map<GUID_WICPixelFormat, uint32_t, GUIDHash> ImageUtils::WICPixelFormatBitSize;
-int ImageUtils::StaticCtorTmp = ImageUtils::StaticCtor();
