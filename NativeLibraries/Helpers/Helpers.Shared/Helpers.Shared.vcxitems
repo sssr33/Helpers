@@ -28,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Containers\ConcurrentQueue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\coroutine3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\CoUniquePtr.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\dynamic_stack_array.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\EnumClassBitFlagOperators.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\H.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\HData.h" />

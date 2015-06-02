@@ -7,6 +7,7 @@
 #include <libhelpers\Containers\ConcurrentQueue.h>
 #include <libhelpers\Thread\PPL\critical_section_guard.h>
 #include <libhelpers\H.h>
+#include <libhelpers\dynamic_stack_array.h>
 
 #include <queue>
 #include <memory>
@@ -26,6 +27,24 @@ struct ttt{
 };
 
 void Class1::Test(){
+
+	{
+		dynamic_stack_array<size_t> tmp2(10);
+
+		tmp2[0] = 123;
+
+		auto v = tmp2[0];
+
+		dynamic_stack_array<size_t> tmp3, tmp4;
+
+		tmp3 = tmp2;
+		tmp4 = std::move(tmp2);
+
+		int stop = 243;
+	}
+	
+
+
 
 	ttt tmp[4];
 

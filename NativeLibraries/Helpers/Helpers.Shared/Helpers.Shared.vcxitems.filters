@@ -45,6 +45,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\Metainfo\RawType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\EnumClassBitFlagOperators.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\ArrayIBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)libhelpers\dynamic_stack_array.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)libhelpers\PixelConverter\PixelConverter.cpp" />
