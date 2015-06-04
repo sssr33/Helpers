@@ -10,6 +10,9 @@ class comptr_vector{
 	static_assert(std::is_base_of<IUnknown, T>::value, "T must inherit from IUnknown");
 	typedef std::vector<T *> vecType;
 public:
+	typedef T ** pointer;
+	typedef T *const * const_pointer;
+
 	comptr_vector(){
 	}
 
@@ -69,11 +72,11 @@ public:
 		return this->vec.size();
 	}
 
-	T **data(){
+	pointer data(){
 		return this->vec.data();
 	}
 
-	T *const *data() const{
+	const_pointer data() const{
 		return this->vec.data();
 	}
 
