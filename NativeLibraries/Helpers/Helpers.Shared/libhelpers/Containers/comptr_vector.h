@@ -79,13 +79,18 @@ public:
 
 	void push_back(const Microsoft::WRL::ComPtr<T> &v){
 		auto tmp = v.Get();
-		static_cast<IUnknown *>(tmp)->AddRef();
+		if (tmp){
+			static_cast<IUnknown *>(tmp)->AddRef();
+		}
 
 		this->vec.push_back(tmp);
 	}
 
 	void push_back(T *v){
-		static_cast<IUnknown *>(v)->AddRef();
+		if (v){
+			static_cast<IUnknown *>(v)->AddRef();
+		}
+
 		this->vec.push_back(v);
 	}
 
