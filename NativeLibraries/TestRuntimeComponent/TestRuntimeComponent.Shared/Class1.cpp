@@ -7,7 +7,7 @@
 #include <libhelpers\Containers\ConcurrentQueue.h>
 #include <libhelpers\Thread\PPL\critical_section_guard.h>
 #include <libhelpers\H.h>
-#include <libhelpers\dynamic_stack_array.h>
+#include <libhelpers\Containers\dynamic_stack_array.h>
 
 #include <queue>
 #include <memory>
